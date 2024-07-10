@@ -1,0 +1,51 @@
+version: 2
+task_description: 'Teach the model about the bonfire utility'
+created_by: adamrdrew
+domain: consoledot
+seed_examples:
+ - question: How do I install bonfire?
+   answer: |
+     Make sure you have pip installed, then run `pip install crc-bonfire`.
+ - question: How do I prevent getting rate limited by Github when using bonfire?
+   answer: |
+     On Github create a personal access token on your GitHub account which grants bonfire read
+     access to your repos. Then, configure bonfire to use the token with:
+     `echo 'GITHUB_TOKEN=<your api token>' >> ~/.config/bonfire/env`
+     Please note: When using the Github token (classic), it must have the read:project scope.
+     In addition, since some projects may be private, you will need to add the repo (full control
+     of private repositories) scope too. for the template fetching to work!
+ - question: Can I use bonfire from a container rather than install locally?
+   answer: |
+    Yes! You can use the `quay.io/redhatinsights/bonfire` container image to run bonfire.
+    `podman run -it --rm quay.io/cloudservices/bonfire`
+ - question: How can I deploy my app with a custom branch?
+   answer: |
+     You can use the `--set-template-ref` option to specify a branch or tag when deploying your app.
+     Example using `advisor-backend`:
+     `bonfire deploy advisor --set-template-ref advisor-backend=custom_branch`
+ - question: How do I deploy a specific git ref for my app?
+   answer: |
+    You can use the `--set-template-ref` option to specify a branch or tag when deploying your app.
+    Example using `advisor-backend`:
+    `bonfire deploy advisor --set-template-ref advisor-backend=df0d7a620b1ac02e59c5718eb22fe82b8a4cfd3d`
+ - question: How can I deploy the version of my app that is running in stage or prod?
+   answer: |
+     You can use the `--ref-env` option. Example: `bonfire deploy advisor --ref-env insights-production`
+ - question: How do I deploy frontends?
+   answer: |
+     You can deploy frontends using the `--frontends=true` option.
+     Example: `bonfire deploy advisor --frontends=true`
+ - question: How can I reserve a namespace on the ephemeral cluster?
+   answer: |
+     You can use the `bonfire namespace reserve` command.
+ - question: How can I release a namespace on the ephemeral cluster?
+   answer: |
+     You can use the `bonfire namespace release` command.
+ - question: How can I list my reserved namespaces on the ephemeral cluster?
+   answer: |
+     You can use the `bonfire namespace list --mine` command.
+document:
+ repo: https://github.com/RedHatInsights/bonfire.git
+ commit: de6613229cb05f0b8b0b496b4360b6462ce558a0
+ patterns:
+  - README.md
