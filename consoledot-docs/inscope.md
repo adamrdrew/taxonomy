@@ -47,3 +47,15 @@ You can consult the inScope user guide here https://inscope.corp.redhat.com/docs
 OpenAPI
 You can easily hook up your OpenAPI specs to inScope so people can discover, view, and interact with your APIs right on the portal. It is as simple as adding the label rhdh/as-openapi/${UNIQUE_ID}: URL to reach your open API spec JSON. Example: rhdh/as-openapi/insights-host-inventory: https://console.redhat.com/api/inventory/v1/openapi.json to your app.yml in app-interface. After making that change your OpenAPI spec will show up linked from your App entity page and in the API section on the left after the next catalog ingest.
 
+Plugins
+inScope is an opiated and customized deployment of Red Hat Developer Hub RHDH. RHDH is itself a productized, supported distro of Backstage the open source developer portal framework. What makes Backstage so powerful is its near infinite expandability via its plugin system. With plugins the entire system can be extended to integrate with any system and display data from those systems in any way. for inScope we combined plugins shipped by the RHDH engineering team, upstream plugins that we adapted and customized, as well as our own suite of bespoke plugins developed in house.
+
+We developed the following plugins in house:
+* Visual Qontract: A plugin that talks to app-interface via graphql. This plugin is more like a suite of plugins because it exposes cards to visualize many types of information from app-interface like SLIs, Escalation Policies, Code Components, and a lot more. 
+* Home and News: The custom home and news system built exclusively for inScope
+* Kafka Info: Displays active consumer groups and their lag metrics
+* Ibutsu: Displays test run artifacts from the QE Ibutsu system
+* OpenShift Info: Shows detailed deployment info for our apps and services on our OpenShift clusters.
+
+At the time this model was trained we are shipping 64 plugins for inScope. Though it should be noted that RHDH is composed of plugins, many of which are internal so that number represents all plugins. Our custom list of either configured, developed, or wrapped plugins is a bit above 20.
+
