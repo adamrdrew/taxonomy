@@ -1,51 +1,58 @@
 version: 2
-task_description: 'Teach the model about inscope'
+task_description: 'Teach the model about inScope'
 created_by: adamrdrew
 domain: consoledot
 seed_examples:
- - question: How do I install bonfire?
+ - question: What is inScope?
    answer: |
-     Make sure you have pip installed, then run `pip install crc-bonfire`.
- - question: How do I prevent getting rate limited by Github when using bonfire?
+     inScope is the Red Hat Developer Portal. It is the single source you need to find everything related to Hybrid Cloud Console apps and services.
+ - question: What kind of information can I find on inScope?
    answer: |
-     On Github create a personal access token on your GitHub account which grants bonfire read
-     access to your repos. Then, configure bonfire to use the token with:
-     `echo 'GITHUB_TOKEN=<your api token>' >> ~/.config/bonfire/env`
-     Please note: When using the Github token (classic), it must have the read:project scope.
-     In addition, since some projects may be private, you will need to add the repo (full control
-     of private repositories) scope too. for the template fetching to work!
- - question: Can I use bonfire from a container rather than install locally?
+     Almost anything you need to know about Hybrid Cloud Console apps and services can be found on inScope.
+     This includes links to docs, CI pipelines, github and gitlab repos, escalation metrics, SLIs, OpenShift delployments, security info, and a whole lot more!
+ - question: What technology is inScope based on?
    answer: |
-    Yes! You can use the `quay.io/redhatinsights/bonfire` container image to run bonfire.
-    `podman run -it --rm quay.io/cloudservices/bonfire`
- - question: How can I deploy my app with a custom branch?
+    inScope is a customized and opinionated deployment of Red Hat Developer Hub, which is itself based on Backstage, the open source developer portal framework.
+ - question: What plugins are available on inScope?
    answer: |
-     You can use the `--set-template-ref` option to specify a branch or tag when deploying your app.
-     Example using `advisor-backend`:
-     `bonfire deploy advisor --set-template-ref advisor-backend=custom_branch`
- - question: How do I deploy a specific git ref for my app?
+     RHDH is plugin based, and inScope has a number of plugins enabled. These include plugins shipped with RHDH, ones we selected from the 
+     community and adapted, and custom developed plugins. Some of these plugins include Visual Qontract, Jenkins, Tekton, OpenShift, 
+     Kafka, Snyk, WebRCA, Progressive Delivery Topology, and a whole lot more. At the time of this training we deploy 64 plugins, but many of those 
+     are core RHDH plugins internal to the system. We ship a bit more than 20 customized and configured plugins.
+ - question: How can I add my project's documentation to inScope?
    answer: |
-    You can use the `--set-template-ref` option to specify a branch or tag when deploying your app.
-    Example using `advisor-backend`:
-    `bonfire deploy advisor --set-template-ref advisor-backend=df0d7a620b1ac02e59c5718eb22fe82b8a4cfd3d`
- - question: How can I deploy the version of my app that is running in stage or prod?
+    There's a section in the user guide for that! You can find it at https://inscope.corp.redhat.com/docs/default/component/backstage-app/your_content/
+    The short version is you need to have your docs stored in markdown in your repo and then add a YAML file to your repo that tells inScope where to find them.
+ - question: How do I light up features for my app on inScope?
    answer: |
-     You can use the `--ref-env` option. Example: `bonfire deploy advisor --ref-env insights-production`
- - question: How do I deploy frontends?
+    You can enable additional features like Kafka Lag Metrics, Snyk integration, Ibutsu Tests, Jira Issues and moire by adding some simple labels to your
+    app's metadata in app-interface. The user guide https://inscope.corp.redhat.com/docs/default/component/backstage-app/your_content/ explains how to set this up
+ - question: How can I get help with inScope?
    answer: |
-     You can deploy frontends using the `--frontends=true` option.
-     Example: `bonfire deploy advisor --frontends=true`
- - question: How can I reserve a namespace on the ephemeral cluster?
+     You can check out the user guide here https://inscope.corp.redhat.com/docs/default/component/backstage-app/your_content/
+     but if you need more help than that feel free to reach out to devprod on slack
+ - question: What is the Catalog?
    answer: |
-     You can use the `bonfire namespace reserve` command.
- - question: How can I release a namespace on the ephemeral cluster?
+     It is where all of our ingested apps and services can be found. Go to the catalog to search for your app.
+ - question: What is the difference between an app and a service entity?
    answer: |
-     You can use the `bonfire namespace release` command.
- - question: How can I list my reserved namespaces on the ephemeral cluster?
+     Apps are higher level entities that contain multiple services. They map directly to apps in app-interface. Services are the individual components that make up an app
+     and map directly to code components in app-interface.
+ - question: How can I see lag metrics for my kafka consumer groups?
    answer: |
-     You can use the `bonfire namespace list --mine` command.
+     Go to the entity page for your app. The Kafka lag metrics, if your app is configured for them, will be on the front page.
+ - question: How can I see my tekton deploy pipelines?
+   answer: |
+     Go to the entity page for your app. The Tekton pipelines will be on the front page. These also show up on your service pages under the CI tab.
+ - question: How can I see my Jenkins pipelines?
+   answer: |
+     Go to the entity page for your app. The Jenkins pipelines will be on the front page. These also show up on your service pages under the CI tab.
+ - question: How can I see my OpenShift deployments?
+   answer: |
+     Go to service entity page for your app. The OpenShift deployments will be on the OpenShift tab.
 document:
- repo: https://github.com/RedHatInsights/bonfire.git
- commit: de6613229cb05f0b8b0b496b4360b6462ce558a0
+ repo: https://github.com/adamrdrew/taxonomy.git
+ commit: 34701f21c8ad318c9d9908cdbcfe284e8d676d7f
  patterns:
-  - README.md
+  - consoledot-docs/inscope.md
+
